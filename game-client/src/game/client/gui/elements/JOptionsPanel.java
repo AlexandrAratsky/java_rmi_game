@@ -40,7 +40,7 @@ public class JOptionsPanel extends JPanel {
 		slider.setMaximumSize(new Dimension(205, 50));
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				gameArea.setCoefSize((float)(slider.getValue())/100);
+				gameArea.options.setCoefSize((float)(slider.getValue())/100);
 			}
 		});
 		slider.setBorder(new TitledBorder(new EmptyBorder(0, 0, 0, 0), "\u0421ompression ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -62,7 +62,7 @@ public class JOptionsPanel extends JPanel {
 		final JSpinner spinner = new JSpinner();
 		spinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				gameArea.setTickness((int)spinner.getValue());
+				gameArea.options.setTickness((int)spinner.getValue());
 			}
 		});
 		spinner.setModel(new SpinnerNumberModel(JBoardArea.Options.PREF_TICKNESS, 1, 9, 1));
@@ -71,7 +71,7 @@ public class JOptionsPanel extends JPanel {
 		final JCheckBox chckbxAssist = new JCheckBox("Assistant");
 		chckbxAssist.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				gameArea.setAssistant(e.getStateChange() == ItemEvent.SELECTED);
+				gameArea.options.setAssistant(e.getStateChange() == ItemEvent.SELECTED);
 			}
 		});
 		panel.add(chckbxAssist);
@@ -79,7 +79,7 @@ public class JOptionsPanel extends JPanel {
 		final JToggleButton tglbtnDebug = new JToggleButton("D");
 		tglbtnDebug.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				gameArea.setDebug(tglbtnDebug.isSelected());
+				gameArea.options.setDebug(tglbtnDebug.isSelected());
 			}
 		});
 		panel.add(tglbtnDebug);
@@ -95,13 +95,13 @@ public class JOptionsPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				spinner.setValue(JBoardArea.Options.PREF_TICKNESS);
-				gameArea.setTickness(JBoardArea.Options.PREF_TICKNESS);
+				gameArea.options.setTickness(JBoardArea.Options.PREF_TICKNESS);
 				slider.setValue((int)(JBoardArea.Options.PREF_COEF*100));
-				gameArea.setCoefSize(JBoardArea.Options.PREF_COEF);
+				gameArea.options.setCoefSize(JBoardArea.Options.PREF_COEF);
 				chckbxAssist.setSelected(false);
-				gameArea.setAssistant(false);
+				gameArea.options.setAssistant(false);
 				tglbtnDebug.setSelected(false);
-				gameArea.setDebug(false);
+				gameArea.options.setDebug(false);
 			}
 		});
 		panel_1.add(btnDefault);

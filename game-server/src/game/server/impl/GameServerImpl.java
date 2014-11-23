@@ -1,9 +1,11 @@
 package game.server.impl;
 
+
 import game.enigne.*;
 import game.enigne.callbacks.*;
 import game.server.*;
 
+import java.awt.Color;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -138,8 +140,9 @@ public class GameServerImpl extends UnicastRemoteObject implements GameServer {
 			System.out.println("\t " + p.getID() + " " + p.getName() + " $" + p.getScore());
 	}
 	@Override
-	public int addPlayer(String name) throws RemoteException {
-		Player p = new Player(name);
+	public int addPlayer(String name, int figure, String colorS) throws RemoteException {
+		Color c = new Color(Integer.parseInt(colorS));
+		Player p = new Player(name, figure, c);
 		board.newPlayer(p);
 		playersList.add(p);
 		System.out.println("-> Player " + name + " joined ...");

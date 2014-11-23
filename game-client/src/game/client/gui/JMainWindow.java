@@ -48,7 +48,7 @@ public class JMainWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public JMainWindow(GameServer gameServer, String name) {
+	public JMainWindow(GameServer gameServer, String name, int figure, String colorS) {
 		setTitle("Goridors 1.0: " + name);
 		this.server = gameServer;
 		
@@ -93,7 +93,7 @@ public class JMainWindow extends JFrame {
 					dialog.setVisible(true);
 				}
 			});
-			playerID = server.addPlayer(name);
+			playerID = server.addPlayer(name, figure, colorS);
         	playerName = name;
 		} catch (RemoteException e) { e.printStackTrace(); }	
 		

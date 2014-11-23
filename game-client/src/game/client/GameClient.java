@@ -4,6 +4,7 @@ import game.client.gui.JClientDialog;
 import game.client.gui.JMainWindow;
 import game.server.GameServer;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,17 +17,17 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 public class GameClient {
 
-	private static void trySetNimbusLook() {
+	private static void trySetLookAndFeel() {
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
-		        if ("Nimbus".equals(info.getName())) { UIManager.setLookAndFeel(info.getClassName()); break; }
+		        if ("Windows".equals(info.getName())) { UIManager.setLookAndFeel(info.getClassName()); break; }
 		} catch (Exception e) {
 		    try { UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		    } catch (Exception ex) { ex.printStackTrace(); }
 		}
 	}
 	
-	private static void startGame(String rmi, String name) {
+	private static void startGame(String rmi, String name, int figure, String colorS) {
 		GameServer server = null;
 		try {
         	Remote RemoteObject = Naming.lookup(rmi);
@@ -40,13 +41,13 @@ public class GameClient {
             e.printStackTrace();
             System.exit(-1);
         }		
-		JMainWindow window = new JMainWindow(server, name);
+		JMainWindow window = new JMainWindow(server, name, figure, colorS);
 		window.setVisible(true);
 	}
 	
 	public static void main(String[] args) {
 		
-		trySetNimbusLook();
+		trySetLookAndFeel();
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -60,8 +61,11 @@ public class GameClient {
 							dialog.setVisible(false);
 							String rmi = dialog.getRmi();
 							String name = dialog.getName();
+							int f = dialog.getPlayerFigure() + 1;
+							Color c = dialog.getPlayerColor();
+							String colorS = Integer.toString(c.getRGB());
 							dialog.dispose();
-							startGame(rmi, name);
+							startGame(rmi, name, f, colorS);
 						}
 					});
 				} catch (Exception e) { e.printStackTrace(); }

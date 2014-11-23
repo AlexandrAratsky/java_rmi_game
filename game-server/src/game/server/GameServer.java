@@ -24,6 +24,6 @@ public interface GameServer extends Remote {
 	public List<Player> getPlayerslist() throws RemoteException;
 	public void cellClick(int i, int j,Side side) throws RemoteException;
 	public void addCallbackListener(ServerCallbacks listener) throws RemoteException;
-	public int addPlayer(String name) throws RemoteException;
+	public int addPlayer(String name, int figure, String colorS) throws RemoteException;
 	public void newMessage(String name, String text) throws RemoteException;	
 }
