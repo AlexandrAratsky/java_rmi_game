@@ -15,6 +15,7 @@ import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EtchedBorder;
@@ -94,6 +95,10 @@ public class JMainWindow extends JFrame {
 				}
 			});
 			playerID = server.addPlayer(name, figure, colorS);
+			if (playerID == -1) {
+				JOptionPane.showMessageDialog(this, "Game already started!", "Game started", JOptionPane.CLOSED_OPTION);
+				System.exit(-1);
+			}
         	playerName = name;
 		} catch (RemoteException e) { e.printStackTrace(); }	
 		

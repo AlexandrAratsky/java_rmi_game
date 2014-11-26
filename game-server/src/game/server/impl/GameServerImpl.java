@@ -24,6 +24,7 @@ public class GameServerImpl extends UnicastRemoteObject implements GameServer {
 	private List<Player> playersList;
 	private static int playerCount = 0;
 	private static Scanner sc;
+	private static boolean gameOn = false;
 	
 	@Override
 	public void addCallbackListener(ServerCallbacks listener) {
@@ -97,7 +98,7 @@ public class GameServerImpl extends UnicastRemoteObject implements GameServer {
         			if (out.equals("y") || out.equals("Y"))  
         			{ 
         				for(ServerCallbacks sc : callbacks) sc.startGame();
-        				board.startGame(); flag = false; }
+        				board.startGame(); flag = false; gameOn = true;  }
         			else System.out.println("-> Waiting for players ...");
             	}
             }
@@ -141,13 +142,15 @@ public class GameServerImpl extends UnicastRemoteObject implements GameServer {
 	}
 	@Override
 	public int addPlayer(String name, int figure, String colorS) throws RemoteException {
+		if (!gameOn) {
 		Color c = new Color(Integer.parseInt(colorS));
 		Player p = new Player(name, figure, c);
 		board.newPlayer(p);
 		playersList.add(p);
 		System.out.println("-> Player " + name + " joined ...");
 		playerCount++;
-		return p.getID();		
+		return p.getID();	
+		} else return -1;
 	}
 	@Override
 	public void newMessage(String name, String text) throws RemoteException {

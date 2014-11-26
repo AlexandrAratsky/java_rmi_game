@@ -1,4 +1,4 @@
-package game.gui.drawing;
+package game.client.gui.drawing;
 
 import game.client.gui.elements.JBoardArea;
 import game.enigne.Player;

@@ -12,7 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;
 
-import game.gui.drawing.BoardDrawManager;
+import game.client.gui.drawing.BoardDrawManager;
 import game.server.GameServer;
 
 import javax.swing.JPanel;
